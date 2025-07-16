@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Image, Spin, Table } from "antd";
+import { Image, Table } from "antd";
 
 interface Product {
   id: string;
@@ -35,8 +35,13 @@ function ProductList() {
       title: "Image",
       dataIndex: "image",
       render: (src: string, recourd: Product, index: number) => {
-        return <Image src={src} width={300} alt={recourd.name} />;
-      },
+        return (
+          <div>
+            <p>Index: {index}</p> {/* Ví dụ sử dụng index */}
+            <Image src={src} width={300} alt={recourd.name} />
+          </div>
+        );
+      }
     },
     {
       title: "Description",
