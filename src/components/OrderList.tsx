@@ -53,8 +53,8 @@ function OrderList() {
         dataSource={data}
         columns={columns}
         rowKey={"id"}
-        loading={isLoading} // Hiển thị spinner khi đang tải
-        pagination={{ pageSize: 5 }} // Phân trang, mỗi trang 5 bản ghi
+        loading={isLoading} 
+        pagination={{ pageSize: 5 }} 
       />
     </div>
   );
