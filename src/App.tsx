@@ -1,8 +1,7 @@
-import ProductList from "./components/ProductList";
-import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CategoryList from "./components/CategoryList";
 import ProductDetail from "./components/ProductDetail";
+import UserList from "./components/UserList";
+import ProductCreate from "./components/ProductCreate";
+import "@ant-design/v5-patch-for-react-19";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,6 +12,10 @@ function App() {
     {
       path: "/products",
       element: <ProductList />,
+    },
+    {
+      path: "/products/create",
+      element: <ProductCreate />,
     },
     {
       path: "/product/detail/:productId",
@@ -28,7 +31,7 @@ function App() {
     },
     {
       path: "/users",
-      element: <CategoryList />,
+      element: <UserList />,
     },
     {
       path: "/brands",
