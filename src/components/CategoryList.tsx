@@ -1,41 +1,79 @@
-import { useQuery } from "@tanstack/react-query";
-import { Table } from "antd";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Table, Button, message } from "antd";
 import Header from "./Header";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function CategoryList() {
+  const queryClient = useQueryClient();
   const fetchCategories = async () => {
     const res = await fetch("http://localhost:3001/categories");
     return res.json();
   };
 
+  const deleteCategory = async (id: number) => {
+    await axios.delete(`http://localhost:3001/categories/${id}`);
+  };
   const { data, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
 
+  const { mutate: deleteMutate } = useMutation({
+    mutationFn: deleteCategory,
+    onSuccess: () => {
+      message.success("Delete category successfully");
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
+    },
+    onError: () => {
+      message.error("Delete category failed");
+    },
+  });
+
   const columns = [
     {
-      title: "So thu tu",
+      title: "ID",
       dataIndex: "id",
     },
     {
-      title: "Ten danh muc",
+      title: "Tên danh mục",
       dataIndex: "name",
+    },
+    {
+      title: "Hành động",
+      render: (_: any, record: { id: number; name: string }) => (
+        <div>
+          <Button type="link">
+            <Link to={`/categories/update}/${record.id}`}>Cập nhật</Link>
+          </Button>
+          <Button
+            type="link"
+            danger
+            onClick={() => {
+              if (window.confirm("Do you delete?")) {
+                deleteMutate(record.id);
+              }
+            }}
+          >
+            Xóa
+          </Button>
+        </div>
+      ),
     },
   ];
 
   return (
     <div>
       <Header />
-      {/* {isLoading && <Spin />} */}
-      {/* {error && <p>Error: {error.message}</p>} */}
-      {/* {data?.map((item: Product) => (
-        <p key={item.id}>{item.name}</p>
-      ))} */}
+      <div style={{ margin: "16px" }}>
+        <Button type="primary">
+          <Link to="/categories/create">Tạo danh mục</Link>
+        </Button>
+      </div>
       <Table
         dataSource={data}
         columns={columns}
-        rowKey={"id"}
+        rowKey="id"
         loading={isLoading}
       />
     </div>
