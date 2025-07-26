@@ -5,7 +5,6 @@ import axios from "axios";
 function ProductCreate() {
   const [form] = Form.useForm();
 
-
   const addProduct = async (values: any) => {
     return await axios.post("http://localhost:3001/products", values);
   };

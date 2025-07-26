@@ -25,7 +25,6 @@ function ProductList() {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
-
   const columns = [
     {
       title: "ID",
@@ -55,7 +54,7 @@ function ProductList() {
     },
   ];
   return (
-   <div>
+    <div>
       <Header />
       {/* {isLoading && <Spin />} */}
       {error && <p>Error: {error.message}</p>}

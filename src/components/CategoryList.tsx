@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Table } from "antd";
-
-interface Category {
-  id: string;
-  name: string;
-  description: string;
-}
+import Header from "./Header";
 
 function CategoryList() {
   const fetchCategories = async () => {
@@ -13,37 +8,35 @@ function CategoryList() {
     return res.json();
   };
 
-  // state data, isLoading, error
-  const { data, isLoading, error } = useQuery<Category[]>({
+  const { data, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
-  console.log(data, isLoading, error);
 
   const columns = [
     {
-      title: "ID",
+      title: "So thu tu",
       dataIndex: "id",
     },
     {
-      title: "Name",
+      title: "Ten danh muc",
       dataIndex: "name",
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
     },
   ];
 
   return (
     <div>
-      {error && <p>Error: {error.message}</p>}
+      <Header />
+      {/* {isLoading && <Spin />} */}
+      {/* {error && <p>Error: {error.message}</p>} */}
+      {/* {data?.map((item: Product) => (
+        <p key={item.id}>{item.name}</p>
+      ))} */}
       <Table
         dataSource={data}
         columns={columns}
         rowKey={"id"}
-        loading={isLoading} // Hiển thị spinner khi đang tải
-        pagination={{ pageSize: 5 }} // Phân trang, mỗi trang 5 bản ghi
+        loading={isLoading}
       />
     </div>
   );
