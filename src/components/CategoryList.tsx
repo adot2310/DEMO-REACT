@@ -44,7 +44,7 @@ function CategoryList() {
       render: (_: any, record: { id: number; name: string }) => (
         <div>
           <Button type="link">
-            <Link to={`/categories/update}/${record.id}`}>Cập nhật</Link>
+            <Link to={`/categories/update/${record.id}`}>Cập nhật</Link>
           </Button>
           <Button
             type="link"

@@ -51,16 +51,12 @@
   ],
   "categories": [
     {
-      "id": 1,
-      "name": "Smartphones"
+      "name": "Smartphones",
+      "id": 1
     },
     {
       "id": 2,
       "name": "Tablets"
-    },
-    {
-      "id": 3,
-      "name": "Laptops"
     }
   ],
   "users": [
