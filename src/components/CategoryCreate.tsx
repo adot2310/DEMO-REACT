@@ -6,28 +6,25 @@ function CategoryCreate() {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
 
-  // Hàm gửi yêu cầu API để tạo danh mục
   const addCategory = async (values: any) => {
     return await axios.post("http://localhost:3001/categories", values);
   };
 
-  // Mutation hook để thực hiện tạo danh mục
   const { mutate } = useMutation({
     mutationFn: addCategory,
     onSuccess: () => {
       message.success("Tạo danh mục thành công");
       // Invalidate cache của query "categories" để refresh dữ liệu
       queryClient.invalidateQueries({ queryKey: ["categories"] });
-      form.resetFields(); // Reset form sau khi thành công
+      form.resetFields();
     },
     onError: () => {
       message.error("Tạo danh mục thất bại");
     },
   });
 
-  // Hàm xử lý submit form
   const handleSubmit = (values: any) => {
-    mutate(values); // Gọi mutate để thực hiện tạo danh mục
+    mutate(values);
   };
 
   return (
