@@ -19,9 +19,9 @@
       "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630"
     },
     {
-      "name": "34444",
-      "price": 3444,
-      "image": "4",
+      "name": "Asus1",
+      "price": 2323,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
       "id": 6
     },
     {
@@ -41,6 +41,12 @@
       "price": 3333,
       "image": "333",
       "id": 9
+    },
+    {
+      "name": "Nokia haha",
+      "price": 123123,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 10
     }
   ],
   "categories": [

@@ -9,6 +9,7 @@ import "@ant-design/v5-patch-for-react-19";
 import Homepage from "./components/HomePage";
 import ProductUpdate from "./components/ProductUpdate";
 import CategoryUpdate from "./components/CategoryUpdate";
+import CategoryCreate from "./components/CategoryCreate";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +40,10 @@ function App() {
     {
       path: "/categories/update/:categoryId",
       element: <CategoryUpdate />,
+    },
+    {
+      path: "/categories/create",
+      element: <CategoryCreate />,
     },
     {
       path: "/orders",

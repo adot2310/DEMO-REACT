@@ -77,7 +77,7 @@ function ProductList() {
       render: (_: any, record: Product) => (
         <div>
           <Button type="link">
-            <Link to={`/products/update/${record.id}`}>Cập nhật</Link>
+            <Link to={`/products/update/${record.id}`}>Sửa</Link>
           </Button>
           <Button
             type="link"
@@ -100,7 +100,7 @@ function ProductList() {
       <Header />
       <div style={{ margin: "16px" }}>
         <Button type="primary">
-          <Link to="/products/create">Tạo sản phẩm</Link>
+          <Link to="/products/create">Thêm sản phẩm</Link>
         </Button>
       </div>
       {error && <p>Lỗi: {error.message}</p>}

@@ -37,7 +37,7 @@ function ProductUpdate() {
 
   return (
     <div className="mt-6 max-w-[1200px] mx-auto px-6">
-      <h1 className="text-3xl font-bold text-center">Cập nhật sản phẩm</h1>
+      <h1 className="text-3xl font-bold text-center">CẬP NHẬT SẢN PHẨM</h1>
       <Form
         form={form}
         layout="vertical"
