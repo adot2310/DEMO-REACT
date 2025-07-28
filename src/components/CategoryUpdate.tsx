@@ -8,6 +8,7 @@ function CategoryUpdate() {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
 
+  // Fetch danh mục
   const fetchCategory = async () => {
     const res = await fetch(`http://localhost:3001/categories/${categoryId}`);
     return res.json();
@@ -17,7 +18,7 @@ function CategoryUpdate() {
     return await axios.put(`http://localhost:3001/categories/${categoryId}`, values);
   };
 
-  const { data, isLoading } = useQuery({
+  const { data: category, isLoading } = useQuery({
     queryKey: ["category", categoryId],
     queryFn: fetchCategory,
   });
@@ -33,6 +34,10 @@ function CategoryUpdate() {
     },
   });
 
+  const handleSubmit = (values: any) => {
+    mutate(values);
+  };
+
   if (isLoading) return <div>Đang tải...</div>;
 
   return (
@@ -41,8 +46,8 @@ function CategoryUpdate() {
       <Form
         form={form}
         layout="vertical"
-        onFinish={mutate}
-        initialValues={data}
+        onFinish={handleSubmit}
+        initialValues={category}
       >
         <Form.Item
           label="Tên danh mục *"
@@ -54,6 +59,16 @@ function CategoryUpdate() {
         >
           <Input />
         </Form.Item>
+
+        {/* Thêm trường mô tả */}
+        <Form.Item
+          label="Mô tả"
+          name="description"
+          rules={[{ required: false, message: "Mô tả danh mục" }]}
+        >
+          <Input.TextArea placeholder="Nhập mô tả cho danh mục" />
+        </Form.Item>
+
         <Button type="primary" htmlType="submit">
           Cập nhật
         </Button>

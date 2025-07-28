@@ -1,11 +1,23 @@
 import { useMutation } from "@tanstack/react-query";
-import { Button, Form, Input, InputNumber, message, Row, Col } from "antd";
+import { Button, Form, Input, InputNumber, message, Row, Col, Select } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function ProductCreate() {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const [categories, setCategories] = useState<any[]>([]);
+
+  // Fetch danh mục
+  const fetchCategories = async () => {
+    const res = await axios.get("http://localhost:3001/categories");
+    setCategories(res.data);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   const addProduct = async (values: any) => {
     return await axios.post("http://localhost:3001/products", values);
@@ -59,6 +71,21 @@ function ProductCreate() {
             </Form.Item>
           </Col>
           <Col span={24}>
+            <Form.Item
+              label="Danh Mục *"
+              name="categoryId"
+              rules={[{ required: true, message: "Danh mục là bắt buộc" }]}
+            >
+              <Select placeholder="Chọn danh mục">
+                {categories.map((category) => (
+                  <Select.Option key={category.id} value={category.id}>
+                    {category.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={24}>
             <Form.Item label="Hình Ảnh" name="image">
               <Input placeholder="Nhập đường dẫn hình ảnh" />
             </Form.Item>
@@ -71,7 +98,7 @@ function ProductCreate() {
             size="large"
             className="w-full sm:w-auto"
           >
-            Add Product
+            Thêm sản phẩm
           </Button>
         </div>
       </Form>

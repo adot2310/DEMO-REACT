@@ -1,10 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, Form, Input, message } from "antd";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CategoryCreate() {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const addCategory = async (values: any) => {
     return await axios.post("http://localhost:3001/categories", values);
@@ -14,9 +16,9 @@ function CategoryCreate() {
     mutationFn: addCategory,
     onSuccess: () => {
       message.success("Tạo danh mục thành công");
-      // Invalidate cache của query "categories" để refresh dữ liệu
       queryClient.invalidateQueries({ queryKey: ["categories"] });
       form.resetFields();
+      navigate("/categories");
     },
     onError: () => {
       message.error("Tạo danh mục thất bại");
@@ -41,6 +43,15 @@ function CategoryCreate() {
         >
           <Input />
         </Form.Item>
+
+        <Form.Item
+          label="Mô tả"
+          name="description"
+          rules={[{ required: false, message: "Mô tả danh mục" }]}
+        >
+          <Input.TextArea placeholder="Nhập mô tả cho danh mục" />
+        </Form.Item>
+
         <Button type="primary" htmlType="submit">
           Tạo
         </Button>

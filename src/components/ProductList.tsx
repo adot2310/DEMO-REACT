@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Image, Spin, Table, Button, message } from "antd";
+import { Image, Table, Button, message, Spin } from "antd";
 import Header from "./Header";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,12 @@ interface Product {
   name: string;
   price: number;
   image: string;
+  categoryId: number;
+}
+
+interface Category {
+  id: number;
+  name: string;
 }
 
 function ProductList() {
@@ -23,14 +29,24 @@ function ProductList() {
     return res.json();
   };
 
-  const deleteProduct = async (id: number) => {
-    await axios.delete(`http://localhost:3001/products/${id}`);
+  const fetchCategories = async () => {
+    const res = await fetch("http://localhost:3001/categories");
+    return res.json();
   };
 
-  const { data, isLoading, error } = useQuery({
+  const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: ["products", name],
     queryFn: fetchProducts,
   });
+
+  const { data: categories, isLoading: isLoadingCategories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
+
+  const deleteProduct = async (id: number) => {
+    await axios.delete(`http://localhost:3001/products/${id}`);
+  };
 
   const { mutate: deleteMutate } = useMutation({
     mutationFn: deleteProduct,
@@ -59,6 +75,13 @@ function ProductList() {
       title: "Giá",
       dataIndex: "price",
       sorter: (a: Product, b: Product) => a.price - b.price,
+    },
+    {
+      title: "Danh mục",
+      render: (record: Product) => {
+        const category = categories?.find((cat: Category) => cat.id === record.categoryId);
+        return category ? category.name : 'N/A'; 
+      },
     },
     {
       title: "Hình ảnh",
@@ -95,6 +118,8 @@ function ProductList() {
     },
   ];
 
+  if (isLoadingProducts || isLoadingCategories) return <Spin />;
+
   return (
     <div>
       <Header />
@@ -103,12 +128,11 @@ function ProductList() {
           <Link to="/products/create">Thêm sản phẩm</Link>
         </Button>
       </div>
-      {error && <p>Lỗi: {error.message}</p>}
       <Table
-        dataSource={data}
+        dataSource={products}
         columns={columns}
         rowKey="id"
-        loading={isLoading}
+        loading={isLoadingProducts}
         pagination={{ pageSize: 5 }}
       />
     </div>

@@ -1,32 +1,34 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Table, Button, message } from "antd";
 import Header from "./Header";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function CategoryList() {
   const queryClient = useQueryClient();
+
   const fetchCategories = async () => {
     const res = await fetch("http://localhost:3001/categories");
     return res.json();
   };
 
-  const deleteCategory = async (id: number) => {
-    await axios.delete(`http://localhost:3001/categories/${id}`);
-  };
   const { data, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
 
+  const deleteCategory = async (id: number) => {
+    await axios.delete(`http://localhost:3001/categories/${id}`);
+  };
+
   const { mutate: deleteMutate } = useMutation({
     mutationFn: deleteCategory,
     onSuccess: () => {
-      message.success("Delete category successfully");
+      message.success("Xóa danh mục thành công");
       queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
     onError: () => {
-      message.error("Delete category failed");
+      message.error("Xóa danh mục thất bại");
     },
   });
 
@@ -38,6 +40,10 @@ function CategoryList() {
     {
       title: "Tên danh mục",
       dataIndex: "name",
+    },
+    {
+      title: "Mô tả",
+      dataIndex: "description",
     },
     {
       title: "Hành động",
