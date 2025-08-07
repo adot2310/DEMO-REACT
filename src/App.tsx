@@ -6,10 +6,12 @@ import ProductDetail from "./components/ProductDetail";
 import UserList from "./components/UserList";
 import ProductCreate from "./components/ProductCreate";
 import "@ant-design/v5-patch-for-react-19";
-import Homepage from "./components/HomePage";
-import ProductUpdate from "./components/ProductUpdate";
-import CategoryUpdate from "./components/CategoryUpdate";
-import CategoryCreate from "./components/CategoryCreate";
+import RegisterPage from "./components/Register";
+import LoginPage from "./components/Login";
+import Homepage from "./components/Homepage";
+import ProductUpdate from "./components/ProductUpdate.tsx";
+import PrivateRoute from "./components/PrivateRoute.tsx";
+import type { Children } from "react";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,32 +20,38 @@ function App() {
       element: <Homepage />,
     },
     {
+      path: "/register",
+      element: <RegisterPage />,
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
+    },
+    {
       path: "/products",
       element: <ProductList />,
     },
     {
-      path: "/products/create",
-      element: <ProductCreate />,
-    },
-    {
-      path: "/products/update/:productId",
-      element: <ProductUpdate />,
+      path: "/products",
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "create",
+          element: <ProductCreate />,
+        },
+      ],
     },
     {
       path: "/product/detail/:productId",
       element: <ProductDetail />,
     },
     {
+      path: "/product/update/:id",
+      element: <ProductUpdate />,
+    },
+    {
       path: "/categories",
       element: <CategoryList />,
-    },
-    {
-      path: "/categories/update/:categoryId",
-      element: <CategoryUpdate />,
-    },
-    {
-      path: "/categories/create",
-      element: <CategoryCreate />,
     },
     {
       path: "/orders",
@@ -59,7 +67,7 @@ function App() {
     },
   ]);
   return (
-    <div>
+    <div className="max-w-[1200px] mx-auto">
       <RouterProvider router={router} />
     </div>
   );

@@ -1,139 +1,67 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Image, Table, Button, message, Spin } from "antd";
+import { Button, Image, Popconfirm, Table } from "antd";
 import Header from "./Header";
-import { Link, useSearchParams } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import { useList } from "../hooks/useList";
+import { useDelete } from "../hooks/useDelete";
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
-  image: string;
-  categoryId: number;
 }
-
-interface Category {
-  id: number;
-  name: string;
-}
-
 function ProductList() {
-  const [searchParams] = useSearchParams();
-  const queryClient = useQueryClient();
-  const name = searchParams.get("name");
-
-  const fetchProducts = async () => {
-    const res = await fetch(
-      `http://localhost:3001/products?name_like=${name || ""}`
-    );
-    return res.json();
-  };
-
-  const fetchCategories = async () => {
-    const res = await fetch("http://localhost:3001/categories");
-    return res.json();
-  };
-
-  const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: ["products", name],
-    queryFn: fetchProducts,
-  });
-
-  const { data: categories, isLoading: isLoadingCategories } = useQuery({
-    queryKey: ["categories"],
-    queryFn: fetchCategories,
-  });
-
-  const deleteProduct = async (id: number) => {
-    await axios.delete(`http://localhost:3001/products/${id}`);
-  };
-
-  const { mutate: deleteMutate } = useMutation({
-    mutationFn: deleteProduct,
-    onSuccess: () => {
-      message.success("Xóa sản phẩm thành công");
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-    },
-    onError: () => {
-      message.error("Xóa sản phẩm thất bại");
-    },
-  });
+  const { data, isLoading, error } = useList("products");
+  const deleteMutaion = useDelete("products");
 
   const columns = [
     {
       title: "ID",
       dataIndex: "id",
-      render: (id: number) => (
-        <Link to={`/product/detail/${id}`}>ID: {id}</Link>
-      ),
+      render: (id: number) => {
+        return <Link to={`/product/update/${id}`}>Edit ID: {id}</Link>;
+      },
     },
     {
-      title: "Tên",
+      title: "Name",
       dataIndex: "name",
     },
     {
-      title: "Giá",
+      title: "Price",
       dataIndex: "price",
       sorter: (a: Product, b: Product) => a.price - b.price,
     },
     {
-      title: "Danh mục",
-      render: (record: Product) => {
-        const category = categories?.find((cat: Category) => cat.id === record.categoryId);
-        return category ? category.name : 'N/A'; 
+      title: "Image",
+      dataIndex: "image",
+      render: (src: string, recourd: Product) => {
+        return <Image src={src} width={300} alt={recourd.name} />;
       },
     },
     {
-      title: "Hình ảnh",
-      dataIndex: "image",
-      render: (src: string, record: Product) => (
-        <Image
-          src={src}
-          width={100}
-          alt={record.name}
-          fallback="/fallback-image.jpg"
-        />
-      ),
-    },
-    {
-      title: "Hành động",
-      render: (_: any, record: Product) => (
-        <div>
-          <Button type="link">
-            <Link to={`/products/update/${record.id}`}>Sửa</Link>
-          </Button>
-          <Button
-            type="link"
-            danger
-            onClick={() => {
-              if (window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
-                deleteMutate(record.id);
-              }
-            }}
-          >
-            Xóa
-          </Button>
-        </div>
+      title: "Actions",
+      render: (product: Product) => (
+        <Popconfirm
+          title="Delete the task"
+          description="Are you sure to delete this task?"
+          onConfirm={() => deleteMutaion.mutate(product.id)}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button danger>Delete</Button>
+        </Popconfirm>
       ),
     },
   ];
-
-  if (isLoadingProducts || isLoadingCategories) return <Spin />;
-
   return (
     <div>
       <Header />
-      <div style={{ margin: "16px" }}>
-        <Button type="primary">
-          <Link to="/products/create">Thêm sản phẩm</Link>
-        </Button>
-      </div>
+      {error && <p>Error: {error.message}</p>}
       <Table
-        dataSource={products}
+        dataSource={data}
         columns={columns}
-        rowKey="id"
-        loading={isLoadingProducts}
-        pagination={{ pageSize: 5 }}
+        rowKey={"id"}
+        loading={isLoading} // Hiển thị spinner khi đang tải
+        pagination={{ pageSize: 5 }} // Phân trang, mỗi trang 5 bản ghi
       />
     </div>
   );
