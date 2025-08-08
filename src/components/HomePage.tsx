@@ -1,17 +1,16 @@
-import { useEffect } from "react";
+import React from "react";
 import Header from "./Header";
+import ContentComponent from "./Content";
+import Footer from "./Footer";
 
-function Homepage() {
-  useEffect(() => {
-    const timer = setInterval(() => console.log("Tick"), 1000);
-    return () => clearInterval(timer);
-  }, []);
+const HomePage: React.FC = () => {
   return (
     <div>
       <Header />
-      <h1>Trang chủ</h1>
-      <p>Chào mừng bạn đến với trang chủ của chúng tôi!</p>
+      <ContentComponent />
+      <Footer />
     </div>
   );
-}
-export default Homepage;
+};
+
+export default HomePage;

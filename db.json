@@ -1,57 +1,96 @@
 {
   "products": [
     {
-      "name": "iPhone 15s",
-      "price": 999,
-      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
-      "id": 1,
-      "categoryId": 1
-    },
-    {
-      "id": 2,
       "name": "Samsung Galaxy S24",
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
       "price": 899,
-      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
-      "categoryId": 1
-    },
-    {
-      "name": "Smartphone 555",
-      "price": 342323,
-      "categoryId": 2,
-      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
-      "id": 3
-    },
-    {
-      "name": "Iphone 13",
-      "price": 230000,
-      "categoryId": 1,
-      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
-      "id": 4
-    }
-  ],
-  "categories": [
-    {
-      "name": "Smartphones",
-      "description": "Các loại điện thoại thông minh.",
-      "id": 1
-    },
-    {
-      "name": "Tablets",
-      "description": "Máy tính bảng và thiết bị cầm tay.",
       "id": 2
     },
     {
       "id": 3,
-      "name": "Motorola",
-      "description": "Các sản phẩm của hãng Motorola."
+      "name": "Xiaomi Mi 14",
+      "price": 599,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630"
+    },
+    {
+      "name": "qweqwe",
+      "price": 22222,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 5
+    },
+    {
+      "name": "hoadv",
+      "price": 22222,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 6
+    },
+    {
+      "name": "hoadv",
+      "price": 3333,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 7
+    },
+    {
+      "name": "hoadv",
+      "price": 13333,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 8
+    },
+    {
+      "name": "hoadv",
+      "price": 22222,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 9
+    },
+    {
+      "name": "hoadv",
+      "price": 2222,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 10
+    },
+    {
+      "name": "hoadv",
+      "price": 2222,
+      "image": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "id": 11
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Smartphones"
+    },
+    {
+      "id": 2,
+      "name": "Tablets"
+    },
+    {
+      "id": 3,
+      "name": "Laptops"
     }
   ],
   "users": [
     {
-      "id": 1,
-      "name": "thuan",
-      "email": "user1@example.com",
-      "IsActive": true
+      "email": "hoadv21@fpt.edu.vn",
+      "password": "$2a$10$wj6KQYyH5Y6y8UZkOrMna.PUiEzX2xrZe40NQNv3Ya9Kiyu.2ZvI6",
+      "id": 1
+    },
+    {
+      "email": "hoadv214@fpt.edu.vn",
+      "password": "$2a$10$WGyIBs6RfLN.V3FgvGM9gOlM8UwrWLg5y24hTwL4KcoJJgRmA828C",
+      "id": 2
+    },
+    {
+      "email": "anhtu@gmail.com",
+      "password": "$2a$10$z8NvTfD2kDbgQrD3zycflO6..wWA9TFdq7EYeX9BoZ2GDWqd98J5G",
+      "id": 3
+    },
+    {
+      "email": "dotu2310@gmail.com",
+      "password": "$2a$10$kRdAjLzMGQ7FrM3Evt6A3eNXfqCpwcZic8aP1W.LNGnplNMJI0gHa",
+      "fullName": "Đỗ Tú",
+      "confirmPassword": "123456",
+      "id": 4
     }
   ]
 }

@@ -8,7 +8,7 @@ import ProductCreate from "./components/ProductCreate";
 import "@ant-design/v5-patch-for-react-19";
 import RegisterPage from "./components/Register";
 import LoginPage from "./components/Login";
-import Homepage from "./components/Homepage";
+import Homepage from "./components/HomePage.tsx";
 import ProductUpdate from "./components/ProductUpdate.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
 import type { Children } from "react";
